@@ -33,7 +33,6 @@ import ph from "password-hash";
 import uniqId from "uniqid";
 import session from "express-session";
 import express from "express";
-import nodemailer from "nodemailer";
 import QRCode from "qrcode";
 
 const app = express();
@@ -132,65 +131,68 @@ const PLAN_VALIDITY_DAYS = { Starter: 30, Pro: 60, Enterprise: 180 };
 // ---------------------------------------------------------------------
 // EMAIL (Gmail) — naya order aane par plant ko email se notify karta hai
 // ---------------------------------------------------------------------
-// .env me ye set karo:
-//   GMAIL_USER=youraddress@gmail.com
-//   GMAIL_APP_PASSWORD=xxxxxxxxxxxxxxxx   (16-char App Password, normal Gmail password nahi)
+// ---------------------------------------------------------------------
+// EMAIL (Brevo HTTP API) — naya order aane par plant ko email se notify karta hai
+// Render ka FREE plan outbound SMTP ports (25/465/587) block karta hai,
+// isliye Gmail SMTP (nodemailer) free instance par kabhi kaam nahi karega.
+// Brevo ka HTTP API port 443 (HTTPS) pe chalta hai, jo kabhi block nahi hota.
 //
-// App Password kaise banate hain:
-//   1. Gmail account me 2-Step Verification ON karo (myaccount.google.com/security)
-//   2. myaccount.google.com/apppasswords par jaake naya App Password generate karo
-//   3. Wahi 16-digit password .env me daalo (spaces hata ke)
-// Ye poori tarah FREE hai — Gmail koi charge nahi leta, sirf ek roz ki
-// sending limit hai (~500 emails/din normal account pe), jo is app ke liye kaafi hai.
-const emailTransporter =
-  process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD
-    ? nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        family: 4, // IPv4 force
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_APP_PASSWORD,
-        },
-      })
-    : null;
+// .env me ye set karo:
+//   BREVO_API_KEY=xkeysib-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+//   BREVO_SENDER_EMAIL=youraddress@gmail.com   (Brevo dashboard me "Single Sender" verify karo)
+// (brevo.com par free signup karo, "Single Sender" verify karo, phir
+//  SMTP & API > API Keys > "Generate a new API key" se BREVO_API_KEY lo)
+// ---------------------------------------------------------------------
+const BREVO_API_KEY = process.env.BREVO_API_KEY;
+const BREVO_SENDER_EMAIL = process.env.BREVO_SENDER_EMAIL;
 
-if (!emailTransporter) {
+if (!BREVO_API_KEY || !BREVO_SENDER_EMAIL) {
   console.warn(
-    "GMAIL_USER / GMAIL_APP_PASSWORD .env me nahi mile — order email notifications OFF rahenge."
+    "BREVO_API_KEY / BREVO_SENDER_EMAIL .env me nahi mile — order email notifications OFF rahenge."
   );
 }
 
 // Naya order aane par plant ko email bhejta hai.
 // Kabhi bhi order flow ko fail nahi karta — sirf error log karta hai.
 async function notifyPlantNewOrder(plantData, { orderID, itemsSummary, totalAmount, buyerData }) {
-  if (!emailTransporter) return;
+  if (!BREVO_API_KEY || !BREVO_SENDER_EMAIL) return;
   if (!plantData.email) {
     console.warn(`Plant "${plantData.plant_name}" ka email nahi mila, notify skip.`);
     return;
   }
 
   try {
-    await emailTransporter.sendMail({
-      from: `"Water Sale " <${process.env.GMAIL_USER}>`,
-      to: plantData.email,
-      subject: `Naya Order Aaya Hai — #${orderID}`,
-      text:
-        `Namaste ${plantData.owner_name || plantData.plant_name},\n\n` +
-        `Aapko "Water Buy or Sale" app par ek naya order mila hai:\n\n` +
-        `Order ID: ${orderID}\n` +
-        `Items: ${itemsSummary}\n` +
-        `Total: ₹${totalAmount}\n` +
-        `Buyer: ${buyerData.buyer_name}\n` +
-        `Address:${buyerData.city}, ${buyerData.dist}, ${buyerData.state} — ${buyerData.pincode}\n\n` +
-        `Order accept karne ke liye App Ya Website kholo aur accept karne k baad Directly buyer ko Call karo : ${process.env.APP_BASE_URL || ""}/plant_home\n\n` +
-        `— CanConnect`,
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "api-key": BREVO_API_KEY,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        sender: { name: "Water Sale", email: BREVO_SENDER_EMAIL },
+        to: [{ email: plantData.email, name: plantData.owner_name || plantData.plant_name }],
+        subject: `Naya Order Aaya Hai — #${orderID}`,
+        textContent:
+          `Namaste ${plantData.owner_name || plantData.plant_name},\n\n` +
+          `Aapko "Water Buy or Sale" app par ek naya order mila hai:\n\n` +
+          `Order ID: ${orderID}\n` +
+          `Items: ${itemsSummary}\n` +
+          `Total: ₹${totalAmount}\n` +
+          `Buyer: ${buyerData.buyer_name}\n` +
+          `Address:${buyerData.city}, ${buyerData.dist}, ${buyerData.state} — ${buyerData.pincode}\n\n` +
+          `Order accept karne ke liye App Ya Website kholo aur accept karne k baad Directly buyer ko Call karo : ${process.env.APP_BASE_URL || ""}/plant_home\n\n` +
+          `— CanConnect`,
+      }),
     });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Brevo API error ${res.status}: ${errText}`);
+    }
+
     console.log(`Email notify SUCCESS: order #${orderID} -> ${plantData.email}`);
-  }
-  
-  catch (err) {
+  } catch (err) {
     console.error("Email notify error:", err.message);
   }
 }
