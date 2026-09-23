@@ -120,7 +120,7 @@ async function getPaypalAccessToken() {
   }
   return data.access_token;
 }*/
-const PLAN_PRICES = { Starter: 379 , Pro: 649 , Enterprise: 1799  };
+const PLAN_PRICES = { Starter: 89 , Pro: 149 , Enterprise: 349  };
 // har plan ki apni validity (din mein) — Starter 1 month, Pro 2 months, Enterprise 6 months
 const PLAN_VALIDITY_DAYS = { Starter: 30, Pro: 60, Enterprise: 180 };
 
