@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="buyer-hist-page">
+  <div class="topbar">
+    <a class="brand" href="/buyer_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/buyer_home">Home</a>
+      <a href="/order_can">Order Can</a>
+      <a href="/buyer_history">History</a>
+      <a href="/buyer_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <b style="color: red;"><h1 class="page-title"> Aapke Orders </h1></b>
+    <b><i style="color: var(--ink);"><p class="page-sub"><%= name %> ki order history</p></i></b>
+    <div class="panel">
+      <% if (dataArr.buyer_his_data.length === 0) { %>
+        <p class="empty">Abhi koi order nahi kiya. <a href="/order_can">Pehla order karo →</a></p>
+      <% } else { %>
+        <% dataArr.buyer_his_data.forEach(function(o){ %>
+          <div class="order-item">
+            <div>
+              <div class="order-id">#<%= o.OrderId %> · <%= o.Date %></div>
+              <div class="order-main"><%= o.ItemsSummary %> — <%= o.Ordered_from %></div>
+              <div class="order-meta">Plant Phone: <%= o.Plant_ph %></div>
+            </div>
+            <span class="badge <%= o.Status.toLowerCase() %>"><%= o.Status %></span>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

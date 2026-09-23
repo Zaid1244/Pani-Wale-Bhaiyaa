@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="buyer-login-page">
+  <div class="topbar">
+    <a class="brand" href="/"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 Buy Water  ( पानी खरीदें )</span></a>
+  </div>
+  <div class="wrap-narrow buyer-login-content">
+    <h1 class="page-title">Buyer Login</h1>
+    <p class="page-sub">Order karne ke liye login karo</p>
+
+    <% if (errState) { %><div class="msg err"><%= errMsg %></div><% } %>
+
+    <form action="/buyer_login_submit" method="post">
+      <label>Email</label>
+      <input type="email" name="email" required />
+      <label>Password</label>
+      <input type="password" name="psw" required />
+      <input type="submit" value="Login" />
+    </form>
+    <div class="link-alt">Account nahi hai? <a href="/buyerRegister">Register Karo</a></div>
+  </div>
+</body>
+</html>

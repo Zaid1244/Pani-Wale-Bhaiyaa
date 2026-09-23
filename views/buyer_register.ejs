@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="buyer-register-page">
+  <div class="topbar">
+    <a class="brand" href="/"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);"> 💧 Buy Water  ( पानी खरीदें )</span></a>
+  </div>
+  <div class="wrap-narrow buyer-register-content">
+    <h1 class="page-title">Buyer Register Karo</h1>
+    <b style="color:red;"><p class="page-sub">यह प्लेटफ़ॉर्म खरीदारों के लिए मुफ़्त है। </p></b>
+
+    <% if (errState) { %><div class="msg err"><%= errMsg %></div><% } %>
+    <% if (sucState) { %><div class="msg suc">Register ho gaya! Ab <a href="/buyerlogin">login</a> karo.</div><% } %>
+
+    <form action="/buyer_register_submit" method="post">
+      <label>Poora naam</label>
+      <input type="text" name="user_name" required />
+
+      <label>Email</label>
+      <input type="email" name="email" required />
+
+      <div class="row2">
+        <div><label>Password</label><input type="password" name="psw" required /></div>
+        <div><label>Confirm Password</label><input type="password" name="c_psw" required /></div>
+      </div>
+
+      <label>Phone Number</label>
+      <input type="tel" name="phone_no" required />
+
+      <div class="row2">
+        <div><label>State</label><input type="text" name="state" required /></div>
+        <div><label>District</label><input type="text" name="district" required /></div>
+      </div>
+      <div class="row2">
+        <div><label>City</label><input type="text" name="city" required /></div>
+        <div><label>Pincode</label><input type="text" name="pincode" required /></div>
+      </div>
+
+      <label>Street / Address</label>
+      <input type="text" name="street" required />
+
+      <input type="submit" value="Register Karo" />
+    </form>
+    <div class="link-alt">Pehle se account hai? <a href="/buyerlogin">Login Karo</a></div>
+  </div>
+</body>
+</html>

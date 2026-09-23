@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-profile-page">
+  <div class="topbar">
+    <a class="brand" href="/plant_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/plant_home">Dashboard</a>
+      <a href="/plant_history">History</a>
+      <a href="/plant_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap-narrow">
+   <b style="color: red;"><h1 class="page-title"> <b style="color: navy;">Water</b> Plant Profile</h1></b>
+    <div class="panel">
+      <p><b><%= plant_data.plant_name %></b> (ID: <%= plant_data.plant_id %>)</p>
+      <p style="color:var(--muted); font-size:13.5px; margin-top:4px;">Owner: <%= plant_data.owner_name %></p>
+      <p style="color:var(--muted); font-size:13.5px; margin-top:4px;"><%= plant_data.email %> · <%= plant_data.ph_no %></p>
+      <p style="color:var(--muted); font-size:13.5px; margin-top:8px;"><%= plant_data.street %>, <%= plant_data.city %>, <%= plant_data.dist %>, <%= plant_data.state %> — <%= plant_data.pincode %></p>
+      <p style="margin-top:10px;">
+        Can 20L: <b class="mono">₹<%= plant_data.prices ? plant_data.prices.can20l : 0 %></b> ·
+        Can 10L: <b class="mono">₹<%= plant_data.prices ? plant_data.prices.can10l : 0 %></b> ·
+        Bottle 1L: <b class="mono">₹<%= plant_data.prices ? plant_data.prices.bottle1l : 0 %></b> ·
+        Bottle 500ml: <b class="mono">₹<%= plant_data.prices ? plant_data.prices.bottle500ml : 0 %></b>
+      </p>
+      <div class="stat-grid" style="margin-top:18px;">
+        <div class="stat-card"><div class="num"><%= no_orders %></div><div class="lbl">Total Orders</div></div>
+        <div class="stat-card"><div class="num" style="font-size:18px;"><%= plant_data.plan %></div><div class="lbl">Current Plan</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

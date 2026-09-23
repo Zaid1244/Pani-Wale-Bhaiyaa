@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-order-page">
+  <div class="topbar">
+    <a class="brand" href="/buyer_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 Order Kare </span></a>
+    <div class="nav-links">
+      <a href="/buyer_home">Home</a>
+      <a href="/order_can">Order Can</a>
+      <a href="/buyer_history">History</a>
+      <a href="/buyer_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <h1 class="page-title"><b style="color: darkblue;"> Water </b>Plant Chuno</h1>
+    <b><p class="page-sub">Address: <%= buyer_details.street %>, <%= buyer_details.city %>, <%= buyer_details.pincode %></p></b>
+
+    <form action="/order_can" method="get" style="display:flex; gap:8px; align-items:flex-end; margin:14px 0 20px;">
+      <div style="flex:1; max-width:220px;">
+        <label style="margin-top:0;">Pincode se search karo</label>
+        <input type="text" name="pincode" value="<%= searchPincode %>" pattern="\d{6}" maxlength="6" placeholder="e.g. 400001" />
+      </div>
+      <button class="btn btn-sm" type="submit">Search</button>
+    </form>
+
+    <% if (dataArr.plant_data.length === 0) { %>
+      <div class="panel"><p class="empty">Abhi koi plant register nahi hua hai. Baad mein try karo.</p></div>
+    <% } else { %>
+      <div class="plant-grid">
+        <% dataArr.plant_data.forEach(function(p){ %>
+          <div class="plant-card">
+            <div class="pname">
+              <%= p.plant_name %>
+              <% if (p._distance === 0) { %>
+                <span class="plan-pill" style="font-size:11px; margin-left:6px;">Isi pincode me</span>
+              <% } else if (p._distance <= 2) { %>
+                <span class="plan-pill" style="font-size:11px; margin-left:6px;">Nearby</span>
+              <% } else if (p._distance >= 4) { %>
+                <span class="plan-pill" style="font-size:11px; margin-left:6px; opacity:0.6;">Door</span>
+              <% } %>
+            </div>
+            <div class="paddr"><%= p.city %>, <%= p.dist %> — <%= p.pincode %></div>
+            <div class="pprice mono">₹<%= p.price_per_can %> Per Item</div>
+            <form action="/order_can_submit" method="post">
+              <input type="hidden" name="plantname" value="<%= p.plant_name %>" />
+              <% itemTypes.forEach(function(it){ %>
+                <div class="item-row" style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+                  <div>
+                    <div><%= it.label %></div>
+                    <div class="mono" style="font-size:13px; color:#666;">₹<%= (p.prices && p.prices[it.key]) || 0 %></div>
+                  </div>
+                  <input type="number" name="qty_<%= it.key %>" value="0" min="0" style="width:70px;" />
+                </div>
+              <% }); %>
+              <button class="btn btn-sm" style="width:100%; margin-top:14px;" type="submit">Order Karo</button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

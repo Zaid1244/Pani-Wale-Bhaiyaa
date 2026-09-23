@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="buyer-home-page">
+  <div class="topbar">
+    <a class="brand" href="/buyer_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/buyer_home">Home</a>
+      <a href="/order_can">Order Can</a>
+      <a href="/buyer_history">History</a>
+      <a href="/buyer_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+   <b style="color: red;"><h1 class="page-title">Namaste, <b style="color: darkblue;"><%= name %> </b>👋</h1></b>
+   <b><h2 style="color: navy"><p class="page-sub">Nazdiki water plant se order karo </p></h2></b>
+    <div class="panel" style="text-align:center; padding:40px 20px;">
+      <h1 style="margin-bottom:10px;">Pyaas lagi hai?</h1>
+      <b><p style="color:navy; font-size:14px; margin-bottom:18px;">Ek click mein apne aas-paas ke sab water plant dekho aur order karo.</p></b>
+      <b style="display: inline-block; background-color: var(--sun); border-radius: 10px; border: 1px solid #000; box-shadow: 0 2px 8px rgba(0,0,0,0.2);padding: 5px 10px;"><a href="/order_can" class="btn" style="display:inline-block; text-decoration:none; width:auto; padding:13px 26px;">Water Can , Bottles Order Karo →</a></b>
+    </div>
+  </div>
+</body>
+</html>

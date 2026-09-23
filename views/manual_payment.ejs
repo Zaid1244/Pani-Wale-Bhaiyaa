@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("partials/head") %>
+
+<body class="plant-dashboard-page" >
+
+<div class="wrap">
+
+  <div class="panel">
+
+    <h1>💳 Payment Kare</h1>
+    <p class="page-subtitle" style="color: red;">
+      (Payment hone k baad Transaction Id fill kare, Then Submit Kare)
+    </p>
+
+    <p style="color: navy;">
+      Payment Verify Hone k Baad Aapka Plan Activate Ho Jayega.
+      <a href="/help">
+        <button type="button" class="btn btn-outline btn-sm">
+          🆘 Click me For Help?
+        </button>
+      </a>
+    </p>
+
+    <hr>
+
+    <h2>Plan  <h3>
+    <p>
+      <strong><%= payment.plan %></strong>
+    </p></h3></h2>
+
+    <h2>Amount  <h3>
+      <p>
+      <strong>₹<%= payment.amount %></strong>
+    </p></h3></h2>
+
+    <h2>Validity <h3>
+    <p>
+      <%= payment.validityDays %> days
+    </p></h3></h2>
+
+    <hr>
+
+    <h3>UPI Payment</h3>
+
+    <div class="upi-payment-box">
+    
+      <p>
+        <strong>Scan karke payment karein</strong>
+      </p>
+    
+      <!-- Dynamic QR Code -->
+      <img
+        src="<%= qrCodeDataUrl %>"
+        alt="Scan to Pay"
+        style="width:250px;height:250px;"
+        class="upi-qr"
+      >
+    
+      <!-- Payment Details -->
+      <p>
+        <strong>Amount:</strong>
+        ₹<%= payment.amount %>
+        (<%= payment.plan %> Plan)
+      </p>
+    
+      <!-- UPI ID -->
+      <p class="upi-id">
+        UPI ID:
+        <strong><%= upiId %></strong>
+      </p>
+    
+      <!-- Direct UPI App Payment -->
+      <a href="<%= upiLink %>">
+        <button type="button" class="btn">
+          Pay ₹<%= payment.amount %> via UPI App
+        </button>
+      </a>
+    
+      <p>
+        Ya QR scan karke
+        <strong>₹<%= payment.amount %></strong>
+        payment karein.
+      </p>
+    
+    </div>
+
+    <!-- Agar QR image hai to yahan use kar sakte ho -->
+    <!--
+    <img
+      src="/images/upi-qr.png"
+      alt="UPI QR"
+      style="max-width:250px;width:100%;"
+    >
+    -->
+
+    <hr>
+
+    <h2>Payment ke baad</h2>
+
+    <h3> <p style="color: red;">
+      Apna UTR / Transaction ID neeche enter karein.  ⬇️
+    </p></h3>
+
+    <form action="/manual_payment_submit" method="POST">
+
+      <input
+        type="hidden"
+        name="paymentId"
+        value="<%= paymentId %>"
+      >
+
+      <input
+        type="text"
+        name="transactionId"
+        placeholder="Enter UTR / Transaction ID"
+        required
+        minlength="6"
+      >
+
+      <br><br>
+
+      <button type="submit" class="btn">
+        Payment Submit Karo
+      </button>
+
+    </form>
+
+    <br>
+
+    <a href="/plant_home">
+      ← Dashboard par wapas Jaaye
+    </a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

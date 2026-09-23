@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-login-page">
+  <div class="topbar">
+    <a class="brand" href="/"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 Sale Water ( पानी बेचे )</span></a>
+  </div>
+  <div class="wrap-narrow plant-login-content">
+    <h1 class="page-title"> Seller Login</h1>
+    <p class="page-sub">Apna dashboard yahan se kholo</p>
+
+    <% if (errState) { %><div class="msg err"><%= errMsg %></div><% } %>
+
+    <form action="/plant_login_submit" method="post">
+      <label>Plant ID</label>
+      <input type="text" name="plant_id" required />
+      <label>Email</label>
+      <input type="email" name="email" required />
+      <label>Password</label>
+      <input type="password" name="psw" required />
+      <input type="submit" value="Login" />
+    </form>
+    <div class="link-alt">Account nahi hai? <a href="/plantRegister">Register Karo</a></div>
+  </div>
+</body>
+</html>

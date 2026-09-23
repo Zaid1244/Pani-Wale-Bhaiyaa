@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-history-page">
+  <div class="topbar">
+    <a class="brand" href="/plant_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/plant_home">Dashboard</a>
+      <a href="/plant_history">History</a>
+      <a href="/plant_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <b style="color: navy"><h1 class="page-title">Order History</h1></b>
+    <b style="color: green;"><p class="page-sub"><b style="color:red;"><%= name %> </b> ke accepted/delivered orders</p></b>
+    <div class="panel">
+      <% if (dataArr.plant_his_data.length === 0) { %>
+        <p class="empty">Abhi koi order accept nahi hua.</p>
+      <% } else { %>
+        <% dataArr.plant_his_data.forEach(function(o){ %>
+          <div class="order-item">
+            <div>
+              <div class="order-id">#<%= o.OrderId %> · <%= o.Date %></div>
+              <div class="order-main"><%= o.Buyer_name %> — <%= o.ItemsSummary %></div>
+              <div class="order-meta"><%= o.Buyer_address %> · <%= o.Buyer_ph_no %></div>
+            </div>
+            <% if (o.Status === 'Accepted') { %>
+              <form action="/order_delivered" method="post">
+                <input type="hidden" name="orderid" value="<%= o.OrderId %>" />
+                <input type="hidden" name="orderemail" value="<%= o.Buyer_email %>" />
+                <button class="btn btn-sm" type="submit">Delivered Mark Karo</button>
+              </form>
+            <% } else { %>
+              <span class="badge delivered">Delivered</span>
+            <% } %>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

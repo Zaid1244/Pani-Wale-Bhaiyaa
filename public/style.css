@@ -1,0 +1,2159 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+:root{
+  --ink:#0A2A40;
+  --aqua:#2FB6BA;
+  --aqua-deep:#1D8489;
+  --sun:#F4B400;
+  --cream:#F8F4EC;
+  --paper:#FFFFFF;
+  --whatsapp:#25D366;
+  --text:#16242F;
+  --muted:#61758A;
+  --line:#E1DED2;
+  --danger:#E1563F;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  width:100%;
+  min-height:100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.display{
+  font-family:'Fraunces',serif;
+}
+
+.mono{
+  font-family:'IBM Plex Mono',monospace;
+}
+
+a{
+  color:inherit;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.topbar{
+
+  width:100%;
+
+  min-height:75px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:14px 30px;
+
+  border-bottom:1px solid var(--line);
+
+  background:var(--paper);
+
+  gap:20px;
+
+  position:relative;
+
+  z-index:100;
+}
+
+
+/* BRAND */
+
+.brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  text-decoration:none;
+
+  white-space:nowrap;
+}
+
+.brand-name{
+
+  font-family:'Fraunces',serif;
+
+  font-weight:700;
+
+  font-size: clamp(14px, 4vw, 22px);
+
+  color:var(--ink);
+
+  
+}
+
+.brand-sub{
+
+  font-family:'Inter',sans-serif;
+
+  font-size: clamp(9px, 4vw, 15px);
+
+  font-weight:700;
+
+  color:var(--ink);
+}
+
+
+/* NAV LINKS */
+
+.nav-links{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:flex-end;
+
+  gap:8px;
+
+  flex-wrap:wrap;
+}
+
+.nav-links a,
+.nav-links button{
+
+  border:none;
+
+  background: lightskyblue;
+
+  color: black;
+
+  font-weight:700;
+
+  font-size: clamp(9px, 4vw, 15px);
+
+  padding:10px 14px;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+  text-decoration:none;
+
+  font-family:'Inter',sans-serif;
+
+  transition:0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links button:hover{
+
+  background:var(--aqua);
+
+  color: var(--ink);
+}
+
+
+/* SIGNUP */
+
+.nav-links .signup-btn{
+
+  background:var(--ink);
+
+  color:#fff;
+
+  padding:11px 18px;
+}
+
+.nav-links .signup-btn:hover{
+
+  background:var(--aqua);
+
+  color: black;
+}
+
+.nav-links .apk-btn {
+  background: var(--sun);
+  color: red;
+  padding: 11px 18px;
+  animation: apkBlink 3.5s infinite;
+}
+
+
+@keyframes apkBlink {
+  0%, 40%, 100% {
+    background: gold ;
+    color: black;
+    transform: scale(1);
+  }
+
+  45%, 55% {
+    background: red;
+    color: white;
+    transform: scale(1.05);
+  }
+
+  60% {
+    background: goldenrod;
+    color: red;
+    transform: scale(1);
+  }
+}
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 75px);
+  height: auto;
+  overflow: hidden;
+
+  background-image: url('/images/savewater.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 0 0 24px 24px;
+}
+
+
+/* =====================================================
+   HERO LEFT CONTENT
+===================================================== */
+
+.hero-left{
+
+  position:absolute;
+
+  left:5.5%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width: 100%;
+  max-width: 500px;
+
+  z-index:10;
+
+  text-align:left;
+}
+
+
+/* =====================================================
+   HERO BADGE
+===================================================== */
+
+.hero-badge{
+
+  display:inline-block;
+
+  padding:7px 12px;
+
+  margin-bottom:46px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,0.88);
+
+  color:var(--aqua-deep);
+
+  font-size: clamp(11px, 4vw, 18px);
+
+  font-weight:700;
+
+  line-height:2.3;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,0.10);
+}
+
+
+/* =====================================================
+   HERO MAIN HEADING
+===================================================== */
+
+.hero-main-title{
+
+  font-family:'Inter',sans-serif;
+
+  font-size:clamp(30px,3.2vw,48px);
+
+  line-height:1.12;
+
+  font-weight:900;
+
+  color:var(--ink);
+
+  margin:0;
+
+  text-shadow:
+    0 2px 7px rgba(255,255,255,0.75);
+}
+
+
+/* =====================================================
+   HERO SUBTITLE
+===================================================== */
+
+.hero-subtitle{
+
+  max-width:350px;
+
+  margin:17px 0 0;
+
+  color:var(--ink);
+
+  font-size:clamp(12px,1.35vw,20px);
+
+  line-height:1.45;
+
+  font-weight:700;
+
+  text-shadow:
+    0 2px 7px rgba(255,255,255,0.85);
+}
+
+
+/* =====================================================
+   TEXT BELOW BOTTLE CAP
+===================================================== */
+
+.hero-bottle-text{
+
+  position:absolute;
+
+  /*
+    Bottle ke cap ke just neeche
+  */
+
+    top: 38%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    max-width: 500px;
+
+  z-index:12;
+
+  text-align:center;
+
+  color:#102F43;
+
+  font-size:clamp(17px,1.65vw,25px);
+
+  line-height:1.25;
+
+  font-weight:800;
+
+  padding:5px 10px;
+
+  border-radius:8px;
+
+  background:rgba(255,255,255,0.08);
+
+  text-shadow:
+    0 2px 5px rgba(255,255,255,0.90);
+}
+
+
+/* =====================================================
+   RIGHT SIDE BUTTONS
+===================================================== */
+.hero-actions{
+
+  position:absolute;
+
+  right:5.5%;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  z-index:12;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  gap:25px;   /* dono buttons ke beech gap */
+
+}
+
+
+
+.hero-action {
+    width: min(280px, 25vw);
+    min-height: 70px;
+    padding: 16px 20px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:16px;
+
+  text-decoration:none;
+
+  font-size: clamp(11px, 4vw, 18px);
+
+  font-weight:800;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.hero-action:hover{
+
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.22);
+}
+
+
+/* YELLOW */
+
+.hero-action.primary{
+
+  background: var(--aqua);
+
+  color:black;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+}
+
+
+/* WHITE */
+
+.hero-action.secondary{
+
+  background: wheat;
+
+  color: var(--ink) ;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* LIGHT GREY — Contact Us */
+
+.hero-action.tertiary{
+
+  background: #eeeeee;
+
+  color: var(--ink);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+}
+
+
+/* =====================================================
+   GENERIC LAYOUT
+===================================================== */
+
+.wrap{
+
+  max-width:1080px;
+
+  margin:0 auto;
+
+  padding:36px 24px 60px;
+}
+
+.wrap-narrow {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 25px 24px 45px;
+}
+
+
+/* =====================================================
+   PANELS / CARDS
+===================================================== */
+
+.panel{
+
+  background:var(--paper);
+
+  border:1px solid var(--line);
+
+  border-radius:18px;
+
+  padding:26px;
+}
+
+.panel + .panel{
+
+  margin-top:18px;
+}
+
+.panel h3{
+
+  font-family:'Fraunces',serif;
+
+  font-size: clamp(11px, 4vw, 18px);
+
+  color:var(--ink);
+
+  margin-bottom:14px;
+}
+
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+label{
+
+  display:block;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  color:#0A2A40;
+
+  margin:4px 0 2px;
+}
+
+input,
+select{
+
+  width:100%;
+
+  padding:2px 4px;
+
+  border:1.5px solid var(--line);
+
+  border-radius:10px;
+
+  font-size: clamp(9px, 4vw, 16px);
+
+  font-family:'Inter',sans-serif;
+
+  outline:none;
+
+  background:var(--cream);
+}
+
+input:focus,
+select:focus{
+
+  border-color:var(--aqua);
+}
+
+.row2{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:14px;
+}
+
+button.btn,
+input[type=submit]{
+
+  border:none;
+
+  background:var(--ink);
+
+  color:#fff;
+
+  padding:6px 12px;
+
+  border-radius:10px;
+
+  font-weight:700;
+
+  font-size: clamp(11px, 4vw, 17.5px);
+
+  cursor:pointer;
+
+  margin-top:10px;
+
+  width:100%;
+
+  font-family:'Inter',sans-serif;
+}
+
+button.btn:hover,
+input[type=submit]:hover{
+
+  background:var(--aqua-deep);
+}
+
+button.btn-sm{
+
+  width:auto;
+
+  margin-top:0;
+
+  padding:9px 16px;
+
+  font-size: clamp(8px, 4vw, 13px);
+}
+
+.btn-outline{
+
+  background:transparent;
+
+  border:1.5px solid var(--ink);
+
+  color:var(--ink);
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.msg{
+
+  padding:12px 14px;
+
+  border-radius:10px;
+
+  font-size: clamp(8px, 4vw, 13.5px);
+
+  margin-bottom:16px;
+
+  font-weight:600;
+}
+
+.msg.err{
+
+  background:#FDE9E5;
+
+  color:#B33322;
+}
+
+.msg.suc{
+
+  background:#DEF5EE;
+
+  color:#0F7A5C;
+}
+
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+.link-alt{
+
+  display:block;
+
+  text-align:center;
+
+  margin-top:25px;
+
+  font-size: clamp(12px, 4vw, 21px);
+
+  color: black;
+
+  background-color: white;
+}
+
+.link-alt a{
+
+  color:var(--sun);
+
+  font-weight:800;
+
+  text-decoration:none;
+
+  background-color: black;
+}
+
+
+/* =====================================================
+   ORDER ITEMS
+===================================================== */
+
+.order-item{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:14px 0;
+
+  border-bottom:1px solid var(--line);
+
+  gap:12px;
+
+  flex-wrap:wrap;
+}
+
+.order-item:last-child{
+
+  border-bottom:none;
+}
+
+.order-id{
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size: clamp(6px, 4vw, 11.5px);
+
+  color:var(--muted);
+}
+
+.order-main{
+
+  font-weight:700;
+
+  font-size: clamp(8px, 4vw, 14.5px);
+
+  margin-top:2px;
+}
+
+.order-meta{
+
+  font-size: clamp(7px, 4vw, 12.5px);
+
+  color:var(--muted);
+
+  margin-top:2px;
+}
+
+.badge{
+
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  font-size: clamp(6px, 4vw, 11.5px);
+
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+.badge.pending{
+
+  background:#FFF3D6;
+
+  color:#946B00;
+}
+
+.badge.accepted{
+
+  background:#DEEBFB;
+
+  color:#1B5FA8;
+}
+
+.badge.delivered{
+
+  background:#DEF5EE;
+
+  color:#0F7A5C;
+}
+
+.empty{
+
+  color:var(--muted);
+
+  font-size: clamp(8px, 4vw, 14px);
+
+  padding:20px 0;
+
+  text-align:center;
+}
+
+
+/* =====================================================
+   PLANT GRID
+===================================================== */
+
+.plant-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+  gap:14px;
+
+  margin-top:8px;
+}
+
+.plant-card{
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  padding:16px;
+
+  background:var(--cream);
+}
+
+.plant-card .pname{
+
+  font-weight:700;
+
+  font-size: clamp(9px, 4vw, 15px);
+
+  color:var(--ink);
+}
+
+.plant-card .paddr{
+
+  font-size: clamp(6px, 4vw, 12px);
+
+  color:var(--muted);
+
+  margin:2px 0 8px;
+}
+
+.plant-card .pprice{
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size: clamp(7px, 4vw, 13px);
+
+  margin-bottom:10px;
+}
+
+
+/* =====================================================
+   TRIAL
+===================================================== */
+
+.trial-card{
+
+  text-align:center;
+}
+
+.trial-count{
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-weight:600;
+
+  margin-top:10px;
+
+  font-size: clamp(8px, 4vw, 14.5px);
+}
+
+.trial-sub{
+
+  font-size: clamp(6px, 4vw, 12px);
+
+  color:var(--muted);
+
+  margin-top:4px;
+}
+
+.upgrade-banner{
+
+  background:var(--ink);
+
+  color:#fff;
+
+  border-radius:14px;
+
+  padding:18px 20px;
+
+  margin-top:16px;
+}
+
+.upgrade-banner h4{
+
+  font-family:'Fraunces',serif;
+
+  font-size: clamp(7px, 4vw, 15px);
+
+  margin-bottom:6px;
+}
+
+.upgrade-banner p{
+
+  font-size: clamp(6px, 4vw, 12.5px);
+
+  color:#CFE0E7;
+
+  margin-bottom:12px;
+}
+
+.plan-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(140px,1fr));
+
+  gap:10px;
+}
+
+.plan-opt{
+
+  background:rgba(255,255,255,.08);
+
+  border:1px solid rgba(255,255,255,.2);
+
+  border-radius:10px;
+
+  padding:12px;
+
+  text-align:center;
+}
+
+.plan-opt .pn{
+
+  font-weight:700;
+
+  font-size: clamp(6px, 4vw, 13px);
+}
+
+.plan-opt .pp{
+
+  font-family:'IBM Plex Mono',monospace;
+
+  font-size: clamp(9px, 4vw, 15px);
+
+  margin:4px 0;
+}
+
+.plan-opt form button{
+
+  width:100%;
+
+  margin-top:6px;
+
+  background:var(--sun);
+
+  color:var(--ink);
+
+  padding:7px;
+
+  font-size: clamp(6px, 4vw, 11.5px);
+
+  border-radius:7px;
+
+  border:none;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+.plan-pill{
+
+  display:inline-block;
+
+  background:rgba(47,182,186,.12);
+
+  color:var(--aqua-deep);
+
+  font-weight:700;
+
+  font-size: clamp(6px, 4vw, 11.5px);
+
+  padding:4px 10px;
+
+  border-radius:999px;
+
+  margin-top:6px;
+}
+
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width:1000px){
+
+  .topbar{
+
+    padding:13px 20px;
+  }
+
+  .brand-name{
+
+    font-size: clamp(12px, 4vw, 20px);
+  }
+
+  .brand-sub{
+
+    font-size: clamp(7px, 4vw, 13px);
+  }
+
+  .nav-links a{
+
+    font-size: clamp(6px, 4vw, 12px);
+
+    padding:8px 10px;
+  }
+
+
+  /* HERO */
+
+  .hero-left{
+
+    left:4%;
+
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .hero-main-title{
+
+    font-size: clamp(20px, 4vw, 34px);
+  }
+
+  .hero-subtitle{
+
+    font-size: clamp(8px, 4vw, 15px);
+
+    max-width:280px;
+  }
+
+  .hero-bottle-text{
+
+    width: 100%;
+max-width: 500px;
+
+ font-size: clamp(11px, 4vw, 18px);
+
+    top:24%;
+  }
+
+  .hero-actions{
+
+    right:4%;
+  }
+
+  .hero-action{
+
+    width: 100%;
+    max-width: 500px;
+
+    min-height:52px;
+
+    font-size: clamp(7px, 4vw, 15px);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:768px){
+
+  /* NAVBAR */
+
+  .topbar{
+
+    min-height:auto;
+
+    padding:10px 10px 8px;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:7px;
+  }
+
+
+  .brand{
+
+    width:100%;
+
+    justify-content:center;
+
+    gap:5px;
+  }
+
+  .brand-name{
+
+    font-size: clamp(9px, 4vw, 17px);
+
+    text-align:center;
+  }
+
+  .brand-sub{
+
+    font-size: clamp(6px, 4vw, 11px);
+  }
+
+
+  .nav-links{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:3px;
+
+    flex-wrap:nowrap;
+  }
+
+
+  .nav-links a{
+
+    font-size: clamp(5px, 4vw, 9.5px);
+
+    padding:6px 6px;
+
+    white-space:nowrap;
+  }
+
+
+  .nav-links .signup-btn{
+
+    padding:7px 9px;
+  }
+
+
+  /* HERO */
+
+  .hero{
+
+    height:calc(100svh - 92px);
+
+    min-height:560px;
+
+    border-radius:0 0 18px 18px;
+
+    background-position:center center;
+  }
+
+
+  /*
+    LEFT TEXT
+  */
+
+  .hero-left{
+
+    left:50%;
+
+    top:9%;
+
+    transform:translateX(-50%);
+
+    width:92%;
+
+    text-align:center;
+  }
+
+
+  .hero-badge{
+
+    font-size: clamp(5px, 4vw, 9.5px);
+
+    padding:6px 9px;
+
+    margin-bottom:9px;
+  }
+
+
+  .hero-main-title{
+
+    font-size: clamp(15px, 4vw, 27px);
+
+    line-height:1.12;
+  }
+
+
+  .hero-subtitle{
+
+    max-width:330px;
+
+    margin:9px auto 0;
+
+    font-size: clamp(7px, 4vw, 13px);
+
+    line-height:1.35;
+  }
+
+
+  /*
+    BOTTLE CAP KE NICHE TEXT
+  */
+
+  .hero-bottle-text{
+
+    top:36%;
+
+    left:50%;
+
+    width:88%;
+
+    font-size: clamp(7px, 4vw, 14px);
+
+    line-height:1.3;
+
+    padding:4px 7px;
+  }
+
+
+  /*
+    BUTTONS
+  */
+
+  .hero-actions{
+
+    top:auto;
+
+    bottom:6%;
+
+    right:50%;
+
+    transform:translateX(50%);
+
+    width:100%;
+
+    gap:8px;
+  }
+
+
+  .hero-action{
+
+    width:82%;
+
+    max-width:290px;
+
+    min-height:47px;
+
+    padding:11px 16px;
+
+    font-size: clamp(8px, 4vw, 14px);
+
+    border-radius:12px;
+  }
+
+
+  /* STATS */
+
+  .stats-wrap{
+
+    padding:22px 15px 35px;
+  }
+
+
+  .stat-grid{
+
+    grid-template-columns:1fr;
+
+    gap:9px;
+  }
+
+
+  .stat-card{
+
+    padding:14px;
+  }
+
+
+  .stat-card .num{
+
+    font-size: clamp(12px, 4vw, 24px);
+  }
+
+
+  .stat-card .lbl{
+
+    font-size: clamp(6px, 4vw, 11.5px);
+  }
+
+
+  /* FORMS */
+
+  .row2{
+
+    grid-template-columns:1fr;
+  }
+
+
+  .wrap{
+
+    padding:28px 15px 45px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width:480px){
+
+  .brand-name{
+
+    font-size: clamp(8px, 4vw, 15px);
+  }
+
+  .brand-sub{
+
+    font-size: clamp(5px, 4vw, 10px);
+  }
+
+
+  .nav-links{
+
+    gap:2px;
+  }
+
+  .nav-links a{
+
+    font-size: clamp(4px, 4vw, 8.5px);
+
+    padding:5px 4px;
+  }
+
+  .nav-links .signup-btn{
+
+    padding:6px 7px;
+  }
+
+
+  .hero{
+
+    height:calc(100svh - 88px);
+
+    min-height:520px;
+
+    background-position:center center;
+  }
+
+
+  .hero-left{
+
+    top:8%;
+  }
+
+
+  .hero-badge{
+
+    font-size: clamp(4px, 4vw, 8.5px);
+
+    padding:5px 7px;
+  }
+
+
+  .hero-main-title{
+
+    font-size: clamp(12px, 4vw, 24px);
+  }
+
+
+  .hero-subtitle{
+
+    font-size: clamp(6px, 4vw, 12px);
+
+    max-width:290px;
+  }
+
+
+  /*
+    Mobile bottle text
+  */
+
+  .hero-bottle-text{
+
+    top:35%;
+
+    width:91%;
+
+    font-size: clamp(6px, 4vw, 12.5px);
+
+    line-height:1.3;
+  }
+
+
+  .hero-actions{
+
+    bottom:5%;
+  }
+
+
+  .hero-action{
+
+    width:85%;
+
+    max-width:270px;
+
+    min-height:44px;
+
+    font-size: clamp(7px, 4vw, 13px);
+
+    border-radius:11px;
+  }
+
+
+  .stat-card .num{
+
+    font-size: clamp(11px, 4vw, 22px);
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width:360px){
+
+  .brand-name{
+
+    font-size: clamp(7px, 4vw, 14px);
+  }
+
+  .brand-sub{
+
+    font-size: clamp(5px, 4vw, 9px);
+  }
+
+  .nav-links a{
+
+    font-size: clamp(4px, 4vw, 7.5px);
+
+    padding:5px 3px;
+  }
+
+
+  .hero{
+
+    min-height:500px;
+  }
+
+
+  .hero-main-title{
+
+    font-size: clamp(11px, 4vw, 21px);
+  }
+
+
+  .hero-subtitle{
+
+    font-size: clamp(6px, 4vw, 11px);
+
+    max-width:270px;
+  }
+
+
+  .hero-bottle-text{
+
+    top:34%;
+
+    font-size: clamp(6px, 4vw, 11.5px);
+  }
+
+
+  .hero-action{
+
+    width:88%;
+
+    min-height:42px;
+
+    font-size: clamp(7px, 4vw, 12px);
+  }
+
+}
+/* =====================================================
+   RESPONSIVE FIX
+===================================================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+.wrap,
+.wrap-narrow {
+  width: 100%;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+
+  .topbar {
+      padding: 12px 16px;
+  }
+
+  .hero-left {
+      width: 32%;
+      left: 4%;
+  }
+
+  .hero-actions {
+      right: 4%;
+  }
+
+  .hero-action {
+    width: 100%;
+    max-width: 500px;
+      min-height: 55px;
+      font-size: clamp(7px, 4vw, 14px);
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .topbar {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .brand {
+      width: 100%;
+  }
+
+  .nav-links {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    font-size: clamp(5px, 4vw, 11px);
+      padding: 7px 9px;
+  }
+
+  .hero {
+      min-height: calc(100svh - 100px);
+      height: auto;
+      background-position: center;
+  }
+
+  .hero-left {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 35px;
+
+      text-align: center;
+  }
+
+  .hero-main-title {
+      font-size: clamp(18px, 7vw, 34px);
+      margin-top: 95px;
+  }
+
+  .hero-badge{
+    margin-top: 25px;
+    
+  }
+
+  .hero-subtitle {
+      width: 100%;
+      max-width: 400px;
+      margin: 12px auto;
+      font-size: clamp(7px, 3.5vw, 16px);
+  }
+
+  .hero-bottle-text {
+      position: relative;
+      left: auto;
+      transform: none;
+      top: 30%;
+      
+      max-width: 400px;
+      width: 90%;
+      margin: 25px auto 0;
+      margin-top: 235px;
+
+      font-size: clamp(14px, 3vw, 22px);
+  }
+
+  .hero-actions {
+    position: relative;
+
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    transform: none;
+
+    width: 90%;
+    margin: 30px auto 25px;
+    padding-bottom: 0;
+
+    gap: 10px;
+}
+
+  .hero-action {
+      width: 90%;
+      max-width: 320px;
+      min-height: 48px;
+
+      font-size: clamp(7px, 4vw, 14px);
+      padding: 11px 15px;
+  }
+
+  .wrap {
+      padding: 25px 15px 40px;
+  }
+
+  .wrap-narrow {
+      padding: 20px 15px 35px;
+  }
+
+  .panel {
+      padding: 20px 16px;
+  }
+
+  .row2 {
+      grid-template-columns: 1fr;
+  }
+
+  .plant-grid {
+      grid-template-columns: 1fr;
+  }
+}
+
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+  .topbar {
+      padding: 8px;
+  }
+
+  .brand-name {
+    font-size: clamp(8px, 4vw, 16px);
+  }
+
+  .brand-sub {
+    font-size: clamp(5px, 4vw, 10px);
+  }
+
+  .nav-links {
+      gap: 4px;
+  }
+
+  .nav-links a,
+  .nav-links button {
+    font-size: clamp(5px, 4vw, 9px);
+      padding: 6px 7px;
+  }
+
+  .hero-left {
+      padding-top: 25px;
+  }
+
+  .hero-badge {
+    font-size: clamp(5px, 4vw, 9px);
+      padding: 5px 8px;
+  }
+
+  .hero-main-title {
+      font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(12px, 4vw, 12px);
+  }
+
+  .hero-bottle-text {
+    font-size: clamp(6px, 4vw, 12px);
+      width: 92%;
+  }
+
+  .hero-action {
+      width: 92%;
+      min-height: 44px;
+      font-size: clamp(7px, 4vw, 13px);
+  }
+
+  .panel {
+      padding: 16px 13px;
+  }
+
+  label {
+    font-size: clamp(7px, 4vw, 15px);
+  }
+
+  input,
+  select {
+    font-size: clamp(7px, 4vw, 15px);
+      padding: 9px 10px;
+  }
+}
+
+
+/* VERY SMALL MOBILE */
+@media (max-width: 360px) {
+
+  .brand-name {
+    font-size: clamp(7px, 4vw, 14px);
+  }
+
+  .brand-sub {
+    font-size: clamp(5px, 4vw, 9px);
+  }
+
+  .nav-links a,
+  .nav-links button {
+    font-size: clamp(4px, 4vw, 8px);
+      padding: 5px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(11px, 4vw, 21px);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(6px, 4vw, 11px);
+  }
+
+  .hero-action {
+      width: 94%;
+      font-size: clamp(6px, 4vw, 12px);
+  }
+}
+body.plant-login-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.plant-login-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 600px) {
+  body.plant-login-page {
+      background-attachment: scroll;
+      background-position: center center;
+  }
+
+  .plant-login-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+body.buyer-login-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.buyer-login-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 600px) {
+  body.buyer-login-page {
+      background-attachment: scroll;
+      background-position: center center;
+  }
+
+  .buyer-login-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+body.buyer-register-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.buyer-register-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 600px) {
+  body.buyer-register-page {
+      background-attachment: scroll;
+      background-position: center center;
+  }
+
+  .buyer-register-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+body.plant-register-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.plant-register-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 600px) {
+  body.plant-register-page {
+      background-attachment: scroll;
+      background-position: center center;
+  }
+
+  .plant-register-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+body.signup-login-page {
+  min-height: 100vh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-image: url('/images/water.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.signup-login-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 35px;
+}
+@media (max-width: 600px) {
+  body.signup-login-page {
+      background-attachment: scroll;
+      background-position: center center;
+  }
+
+  .signup-login-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+body.plant-dashboard-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.plant-dashboard-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.plant-history-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.plant-history-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.plant-profile-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.plant-profile-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.plant-order-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.plant-order-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.buyer-prof-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.buyer-prof-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.buyer-home-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.buyer-home-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+body.buyer-hist-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  body.buyer-hist-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+@media (max-width: 768px) {
+
+  .row2 {
+      grid-template-columns: 1fr !important;
+      width: 100%;
+  }
+
+  .row2 > * {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+  }
+
+  .wrap {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+
+  body.plant-dashboard-page {
+      width: 100%;
+      
+  }
+}
+/* Dashboard cards */
+.dist-grid-responsive {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dist-grid-responsive {
+      grid-template-columns: 1fr;
+      gap: 20px;
+  }
+
+  .dist-grid-responsive > * {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+  }
+}
+.upi-payment-box {
+  text-align: center;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.upi-qr {
+  width: 230px;
+  height: 230px;
+  object-fit: contain;
+  display: block;
+  margin: 15px auto;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 8px;
+  background: #fff;
+}
+
+.upi-id {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .upi-qr {
+    width: 190px;
+    height: 190px;
+  }
+}
+body.admin-page {
+  min-height: 100vh;
+  background-image: url('/images/drinkingwater.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+@media (max-width: 768px) {
+  body.admin-page {
+      background-attachment: scroll;
+      background-position: center;
+  }
+}
+.admin-content {
+  background: rgba(255, 255, 255, 0.90);
+  border-radius: 18px;
+  padding: 30px;
+  margin-top: 20px;
+}
+@media (max-width: 600px) {
+  .admin-content {
+      width: calc(100% - 30px);
+      box-sizing: border-box;
+      margin: 20px auto;
+      padding: 20px 15px;
+  }
+}
+@media (max-width: 480px) {
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+  }
+
+  .nav-links a {
+    flex: 1;
+    min-width: 0;
+    padding: 7px 3px !important;
+    font-size: 9px !important;
+    line-height: 1.15;
+    text-align: center;
+    white-space: normal !important;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+  }
+
+  .nav-links .apk-btn {
+    padding: 7px 3px !important;
+    font-size: 9px !important;
+  }
+}
+

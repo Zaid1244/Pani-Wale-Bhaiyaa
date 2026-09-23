@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body  class="buyer-prof-page">
+  <div class="topbar">
+    <a class="brand" href="/buyer_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/buyer_home">Home</a>
+      <a href="/order_can">Order Can</a>
+      <a href="/buyer_history">History</a>
+      <a href="/buyer_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap-narrow">
+    <i><b style="color: red;"><h1 class="page-title">Mera Profile</h1></b></i>
+    <div class="panel">
+      <p><b><%= buyer_data.buyer_name %></b></p>
+      <p style="color:var(--muted); font-size:13.5px; margin-top:4px;"><%= buyer_data.email %> · <%= buyer_data.ph_no %></p>
+      <p style="color:var(--muted); font-size:13.5px; margin-top:8px;"><%= buyer_data.street %>, <%= buyer_data.city %>, <%= buyer_data.dist %>, <%= buyer_data.state %> — <%= buyer_data.pincode %></p>
+      <div class="stat-grid" style="margin-top:18px;">
+        <div class="stat-card"><div class="num"><%= no_orders %></div><div class="lbl">Total Orders</div></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

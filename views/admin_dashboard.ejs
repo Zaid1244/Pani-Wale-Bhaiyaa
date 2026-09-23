@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="admin-page">
+  <div class="topbar">
+    <a class="brand" href="/admin"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya Admin</span></a>
+    <div class="nav-links">
+      <a class="logout" href="/admin/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="admin-content">
+    <h1 class="page-title">Platform Status</h1>
+    <p class="page-sub" style="color: red;">  platform ka overview</p>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num"><%= totalPlants %></div><div class="lbl">Total Plants</div></div>
+      <div class="stat-card"><div class="num"><%= freePlants %></div><div class="lbl">Free Trial Plants</div></div>
+      <div class="stat-card"><div class="num"><%= paidPlants %></div><div class="lbl">Paid Plants</div></div>
+      <div class="stat-card"><div class="num"><%= totalBuyers %></div><div class="lbl">Total Buyers</div></div>
+    </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px;">
+      <h3>💰 Commission / Revenue</h3>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num mono">₹<%= totalRevenue %></div><div class="lbl">Total Revenue (sab plan upgrades se)</div></div>
+        <div class="stat-card"><div class="num"><%= totalPaidUpgrades %></div><div class="lbl">Total Paid Upgrades</div></div>
+      </div>
+      <p style="color:var(--muted); font-size:12.5px; margin-top:14px;">
+        Note: App abhi order par commission nahi leta (sirf plants Starter/Pro/Enterprise plan subscribe karte hain).
+        Ye figure sab successful plan-upgrade payments ka jama total hai, jab se ye tracking add hui.
+      </p>
+    </div>
+
+    <div class="panel" style="margin-top:20px;">
+      <h3>📊 Plan Breakdown</h3>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num"><%= planCounts['Free Trial'] || 0 %></div><div class="lbl">Free Trial</div></div>
+        <div class="stat-card"><div class="num"><%= planCounts['Starter'] || 0 %></div><div class="lbl">Starter</div></div>
+        <div class="stat-card"><div class="num"><%= planCounts['Pro'] || 0 %></div><div class="lbl">Pro</div></div>
+        <div class="stat-card"><div class="num"><%= planCounts['Enterprise'] || 0 %></div><div class="lbl">Enterprise</div></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:20px;">
+      <h3>📦 Orders (sabhi plants milaake)</h3>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num"><%= totalOrders %></div><div class="lbl">Total Orders</div></div>
+        <div class="stat-card"><div class="num"><%= pendingOrders %></div><div class="lbl">Pending</div></div>
+        <div class="stat-card"><div class="num"><%= acceptedOrders %></div><div class="lbl">Accepted</div></div>
+        <div class="stat-card"><div class="num"><%= deliveredOrders %></div><div class="lbl">Delivered</div></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:20px;">
+
+      <h3>💳 Plan Payment Requests</h3>
+    
+      <% if (!payments || payments.length === 0) { %>
+    
+        <p class="empty">
+          Abhi koi payment request nahi hai.
+        </p>
+    
+      <% } else { %>
+    
+        <% payments.forEach(function(p) { %>
+    
+          <div class="order-item">
+    
+            <div>
+    
+              <div class="order-id">
+                <%= p.plantName %>
+              </div>
+    
+              <div class="order-main">
+                <%= p.plan %> — ₹<%= p.amount %>
+              </div>
+    
+              <div class="order-meta">
+                UTR:
+                <strong>
+                  <%= p.transactionId || "Not submitted" %>
+                </strong>
+              </div>
+    
+              <div class="order-meta">
+                Status:
+                <strong>
+                  <%= p.status %>
+                </strong>
+              </div>
+    
+            </div>
+    
+            <% if (p.status === "Submitted") { %>
+    
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    
+                <form action="/admin/payment/approve" method="POST">
+    
+                  <input
+                    type="hidden"
+                    name="paymentId"
+                    value="<%= p.id %>"
+                  >
+    
+                  <button
+                    class="btn btn-sm"
+                    type="submit"
+                  >
+                    Approve
+                  </button>
+    
+                </form>
+    
+                <form action="/admin/payment/reject" method="POST">
+    
+                  <input
+                    type="hidden"
+                    name="paymentId"
+                    value="<%= p.id %>"
+                  >
+    
+                  <button
+                    class="btn btn-sm"
+                    type="submit"
+                  >
+                    Reject
+                  </button>
+    
+                </form>
+    
+              </div>
+    
+            <% } %>
+    
+          </div>
+    
+        <% }); %>
+    
+      <% } %>
+    
+    </div>
+  </div>
+</body>
+</html>

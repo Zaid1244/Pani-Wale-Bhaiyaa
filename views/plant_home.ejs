@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-dashboard-page">
+  <div class="topbar">
+    <a class="brand" href="/plant_home"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 PaniWaleBhaiya</span></a>
+    <div class="nav-links">
+      <a href="/plant_home">Dashboard</a>
+      <a href="/plant_history">History</a>
+      <a href="/plant_profile">Profile</a>
+      <a class="logout" href="/logout">Logout</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <b style="color: darkblue;"><h1 class="page-title"><%= name %></h1></b>
+    <p class="page-sub">
+      <b style="color: green;"> Plan: </b><span class="plan-pill"><i style="color: red;"><%= plan %></i></span>
+      <% if (plan !== 'Free Trial' && typeof daysLeft === 'number') { %>
+        <span class="mono" style="font-size:12.5px; color: red; margin-left:8px;">
+          <%= daysLeft %> din baaki (renew <%= new Date(planExpiry).toLocaleDateString('en-IN') %>)
+        </span>
+      <% } %>
+    </p>
+
+    <% if (typeof paymentMsg !== 'undefined' && paymentMsg) { %>
+      <div class="msg <%= paymentOk ? 'suc' : 'err' %>"><%= paymentMsg %></div>
+    <% } %>
+
+    <div class="dist-grid-responsive"></div>
+      
+      <div class="panel">
+        <h3>🔔 Naye Orders (Pending)</h3>
+        <% const trialOver = plan === 'Free Trial' && freeOrdersUsed >= freeLimit; %>
+        <% if (trialOver) { %>
+          <p class="empty" style="color: red;">Order lene ke liye plan khareedo.</p>
+        <% } else if (dataArr.plant_his_data.length === 0) { %>
+          <p class="empty">Abhi koi naya order nahi hai.</p>
+        <% } else { %>
+          <% dataArr.plant_his_data.forEach(function(o){ %>
+            <div class="order-item">
+              <div>
+                <div class="order-id">#<%= o.OrderId %> · <%= o.Date %></div>
+                <div class="order-main"><%= o.Buyer_name %> — <%= o.ItemsSummary %></div>
+                <div class="order-meta"><%= o.Buyer_address %> · <%= o.Buyer_ph_no %></div>
+              </div>
+              <form action="/order_accept" method="post">
+                <input type="hidden" name="orderid" value="<%= o.OrderId %>" />
+                <input type="hidden" name="orderemail" value="<%= o.Buyer_email %>" />
+                <button class="btn btn-sm" type="submit">Accept Karo</button>
+              </form>
+            </div>
+          <% }); %>
+        <% } %>
+      </div>
+
+      <div>
+        <% if (plan === 'Free Trial') { %>
+        <div class="panel trial-card">
+          <h3 style="justify-content:center;">Free Trial Gauge</h3>
+          <svg width="120" height="150" viewBox="0 0 140 170">
+            <defs>
+              <clipPath id="canClip"><path d="M35 26h70l9 22-9 14v82a7 7 0 01-7 7H42a7 7 0 01-7-7V62L26 48z"/></clipPath>
+            </defs>
+            <path d="M35 26h70l9 22-9 14v82a7 7 0 01-7 7H42a7 7 0 01-7-7V62L26 48z" fill="#fff" stroke="#0A2A40" stroke-width="2.5"/>
+            <g clip-path="url(#canClip)">
+              <% const pct = Math.min(freeOrdersUsed / freeLimit, 1); const h = pct*100; const y = 151-h; %>
+              <rect x="20" y="<%= y %>" width="100" height="<%= h %>" fill="<%= freeOrdersUsed >= freeLimit ? '#F4B400' : '#2FB6BA' %>"></rect>
+            </g>
+            <rect x="46" y="60" width="48" height="7" rx="2" fill="#0A2A40"/>
+          </svg>
+          <div class="trial-count"><%= freeOrdersUsed %> / <%= freeLimit %> free order use hue</div>
+          <div class="trial-sub">
+            Order accept karte hi gauge bharta hai
+          </div>
+        </div>
+        <% } %>
+
+        <% if (plan === 'Free Trial' && freeOrdersUsed >= freeLimit) { %>
+        <div class="upgrade-banner">
+          <h4>🎉 Aapke 3 free order poore ho gaye!</h4>
+          <p>Ab koi plan chuno aur bina ruke order lete raho</p>
+          <div class="plan-grid">
+            <div class="plan-opt">
+              <div class="pn">Starter</div>
+              <div class="pp mono">₹379</div>
+              <div class="pv" style="color:var(--sun); font-size:12.5px; margin-top:2px;">1 month validity</div>
+              <form action="/upgrade_plan" method="post"><input type="hidden" name="plan" value="Starter"/><button>Chuno</button></form>
+            </div>
+            <div class="plan-opt">
+              <div class="pn">Pro</div>
+              <div class="pp mono">₹649</div>
+              <div class="pv" style="color:var(--sun); font-size:12.5px; margin-top:2px;">2 month validity</div>
+              <form action="/upgrade_plan" method="post"><input type="hidden" name="plan" value="Pro"/><button>Chuno</button></form>
+            </div>
+            <div class="plan-opt">
+              <div class="pn">Enterprise</div>
+              <div class="pp mono">₹1799</div>
+              <div class="pv" style="color:var(--sun); font-size:12.5px; margin-top:2px;">6 month validity</div>
+              <form action="/upgrade_plan" method="post"><input type="hidden" name="plan" value="Enterprise"/><button>Chuno</button></form>
+            </div>
+        </div>
+      </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

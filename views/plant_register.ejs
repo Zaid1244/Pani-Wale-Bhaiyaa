@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="hi">
+  <%- include("partials/head") %>
+<body class="plant-register-page">
+  <div class="topbar">
+    <a class="brand" href="/"><span class="display" style="font-size:20px; font-weight:700; color:var(--ink);">💧 Sale Water ( पानी बेचे )</span></a>
+  </div>
+  <div class="wrap-narrow plant-register-content">
+    <h1 class="page-title"> Seller Register Karo</h1>
+
+    <% if (errState) { %><div class="msg err"><%= errMsg %></div><% } %>
+    <% if (sucState) { %><div class="msg suc">Register ho gaya! Ab <a href="/plantlogin">login</a> karo.</div><% } %>
+
+    <form action="/plant_register_submit" method="post">
+      <label>Plant / Shop ka naam</label>
+      <input type="text" name="plant_name" required />
+      <div class="row2">
+      <div><label>Plant ID (login me use hoga)</label><input type="text" name="plant_id" required /></div>
+      <div><label>Owner ka naam</label><input type="text" name="owner_name" required /></div>
+    </div>
+
+      <label>Email <small class="hint">(सही ईमेल भरें क्योंकि आपके ऑर्डर का मैसेज ईमेल पर आएगा)</small></label>
+      <input type="email" name="email" required />
+
+      <div class="row2">
+        <div><label>Password</label><input type="password" name="psw" required /></div>
+        <div><label>Confirm Password</label><input type="password" name="c_psw" required /></div>
+      </div>
+
+      <label>Phone Number</label>
+      <input type="tel" name="phone_no" required />
+
+      <div class="row2">
+        <div><label>State</label><input type="text" name="state" required /></div>
+        <div><label>District</label><input type="text" name="district" required /></div>
+      </div>
+      <div class="row2">
+        <div><label>City</label><input type="text" name="city" required /></div>
+        <div><label>Pincode</label><input type="text" name="pincode" required /></div>
+      </div>
+
+      <label>Street / Address</label>
+      <input type="text" name="street" required />
+
+      <div class="row2">
+        <div><label>Can 20L Price (₹)</label><input type="number" name="price_can20l" value="30" required /></div>
+        <div><label>Can 10L Price (₹)</label><input type="number" name="price_can10l" value="20" required /></div>
+      </div>
+      <div class="row2">
+        <div><label>Bottle 1L Price (₹)</label><input type="number" name="price_bottle1l" value="15" required /></div>
+        <div><label>Bottle 500ml Price (₹)</label><input type="number" name="price_bottle500ml" value="10" required /></div>
+      </div>
+
+      <input type="submit" value="Register Karo" />
+    </form>
+    <div class="link-alt">Pehle se account hai? <a href="/plantlogin">Login Karo</a></div>
+  </div>
+</body>
+</html>
