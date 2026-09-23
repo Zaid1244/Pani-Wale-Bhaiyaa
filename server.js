@@ -175,13 +175,13 @@ async function notifyPlantNewOrder(plantData, { orderID, itemsSummary, totalAmou
         subject: `Naya Order Aaya Hai — #${orderID}`,
         textContent:
           `Namaste ${plantData.owner_name || plantData.plant_name},\n\n` +
-          `Aapko "Water Buy or Sale" app par ek naya order mila hai:\n\n` +
+          `Aapko "Pani Wale Bhaiya" App par ek naya order mila hai:\n\n` +
           `Order ID: ${orderID}\n` +
           `Items: ${itemsSummary}\n` +
           `Total: ₹${totalAmount}\n` +
           `Buyer: ${buyerData.buyer_name}\n` +
           `Address:${buyerData.city}, ${buyerData.dist}, ${buyerData.state} — ${buyerData.pincode}\n\n` +
-          `Order accept karne ke liye App Ya Website kholo aur accept karne k baad Directly buyer ko Call karo : ${process.env.APP_BASE_URL || ""}/plant_home\n\n` +
+          `Order accept karne ke liye App Ya Website kholo aur accept karne k baad Directly buyer ko Call karo : https://www.paniwalebhaiya.shop\n\n` +
           `— CanConnect`,
       }),
     });
