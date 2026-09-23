@@ -1,7 +1,12 @@
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import dotenv from "dotenv";
+import dns from "node:dns";
 dotenv.config();
+
+// Render jaise hosts par IPv6 route se Gmail SMTP tak connect fail hota hai
+// (ENETUNREACH / timeout) — isliye IPv4 ko pehle try karne ke liye force karo.
+dns.setDefaultResultOrder("ipv4first");
 
 const serviceAccount = {
   type: process.env.TYPE,
@@ -140,7 +145,10 @@ const PLAN_VALIDITY_DAYS = { Starter: 30, Pro: 60, Enterprise: 180 };
 const emailTransporter =
   process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD
     ? nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        family: 4, // IPv4 force
         auth: {
           user: process.env.GMAIL_USER,
           pass: process.env.GMAIL_APP_PASSWORD,
